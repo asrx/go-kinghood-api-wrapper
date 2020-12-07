@@ -1,0 +1,74 @@
+{
+  "Code":"200",
+  "Message":null,
+  "Data":{
+    "EcOrder":null,
+    "FreightCalss":null,
+    "ShipmentId":null,
+    "LabelReady":true,
+    "LabelUrl":"https://www.ex17usa.com/UploadFiles/UD/2020-12-02/90c7e355-67c5-4223-b077-3d6bf1d408cb.pdf",
+    "ShippingWeight":8,
+    "FactWeight":0,
+    "ShippingPrice":6.48,
+    "TrackingNumbers":[
+      "1Z7A03740311821113"
+    ],
+    "TN2":null,
+    "Carrier":"UPS Ground 6",
+    "CarrierServiceLevel":"UPS Ground",
+    "ShipFrom":{
+      "PostalCode":"92879",
+      "Name":"micheal",
+      "Address1":"2565 SAMPSON AVENUE",
+      "Address2":"",
+      "State":"CA",
+      "City":"CORONA",
+      "Country":"US",
+      "CountryCode":null,
+      "PhoneNumber":"09512680000",
+      "AddrType":1,
+      "Company":""
+    },
+    "ShipTo":{
+      "PostalCode":"92551",
+      "Name":"Donovan",
+      "Address1":"24300 Nandina Ave",
+      "Address2":null,
+      "State":"CA",
+      "City":"Moreno Valley",
+      "Country":"US",
+      "CountryCode":null,
+      "PhoneNumber":"13474483190",
+      "AddrType":1,
+      "Company":""
+    },
+    "OrderNum":"EX145719630",
+    "Parcels":[
+      {
+        "TrackingNumber":"1Z7A03740311821113",
+        "Weight":7.83,
+        "Length":39.37,
+        "Width":14.57,
+        "Height":9.45,
+        "Insure":0,
+        "Picking":null,
+        "FbaRef":null,
+        "Quantity":0,
+        "LabelUrl":"https://www.ex17usa.com/UploadFiles/UD/2020-12-02/90c7e355-67c5-4223-b077-3d6bf1d408cb.pdf",
+        "AdditionalFee":0
+      }
+    ],
+    "Signature":false,
+    "LabelSize":0,
+    "Remark":null,
+    "Remark1":null,
+    "Remark2":null,
+    "Zone":null,
+    "WeightUnitType":0,
+    "AutoChangeService":false,
+    "ShippingDate":null,
+    "ItemList":null,
+    "WarehouseCode":null,
+    "CarrierType":""
+  }
+}
