@@ -8,21 +8,21 @@ import (
 	"github.com/idoubi/goz"
 )
 
-type LabelService struct {
+type KinghoodService struct {
 	key string
 }
 
-func NewLabelService(key string) *LabelService {
-	return &LabelService{
+func NewKinghoodService(key string) *KinghoodService {
+	return &KinghoodService{
 		key: key,
 	}
 }
 
-func (s LabelService)mergeKey(mapParam map[string]interface{}) {
+func (s KinghoodService)mergeKey(mapParam map[string]interface{}) {
 	mapParam["Key"] = s.key
 }
 
-func (s LabelService)postRequest(url string, mapParam map[string]interface{}) (content string, err error) {
+func (s KinghoodService)postRequest(url string, mapParam map[string]interface{}) (content string, err error) {
 
 	s.mergeKey(mapParam)
 
@@ -47,7 +47,7 @@ func (s LabelService)postRequest(url string, mapParam map[string]interface{}) (c
 }
 
 // 获取余额
-func (s LabelService)GetBalance() (money float64, err error){
+func (s KinghoodService)GetBalance() (money float64, err error){
 	var mapParam = make(map[string]interface{})
 	content, err1 := s.postRequest(Conf.GetApiBalance(), mapParam)
 
@@ -75,7 +75,7 @@ func (s LabelService)GetBalance() (money float64, err error){
 }
 
 // 获取服务
-func (s LabelService)GetCarriers() (content string, err error){
+func (s KinghoodService)GetCarriers() (content string, err error){
 	var mapParam = make(map[string]interface{})
 	content, err1 := s.postRequest(Conf.GetApiCarriers(), mapParam)
 	if err1 != nil {
@@ -87,7 +87,7 @@ func (s LabelService)GetCarriers() (content string, err error){
 }
 
 // Rate
-func (s LabelService)GetRate(params string) (rateReply *Entry.RateReply, err error) {
+func (s KinghoodService)GetRate(params string) (rateReply *Entry.RateReply, err error) {
 	//content := `{"Code":"200","Message":"","Data":[{"RateId":"0","Carrier":"UPS Ground 6","CarrierServiceLevel":"UPS Ground","CarrierServiceName":"UPS Ground","ChargeWeight":40,"TotalCharge":32.40,"PackageType":null,"Message":null,"Zone":null,"IsResidential":false,"PublishCharge":0,"IsPublishChargeSpecified":false}]}`
 	var mapParam = make(map[string]interface{})
 	mapParam["Data"] = params
@@ -111,7 +111,7 @@ func (s LabelService)GetRate(params string) (rateReply *Entry.RateReply, err err
 }
 
 //Ship
-func (s LabelService)GetShip(params string) (shipReply *Entry.ShipReply,err error) {
+func (s KinghoodService)GetShip(params string) (shipReply *Entry.ShipReply,err error) {
 	//content := `{"Code":"200","Message":null,"Data":{"EcOrder":null,"FreightCalss":null,"ShipmentId":null,"LabelReady":true,"LabelUrl":"https://www.ex17usa.com/UploadFiles/UD/2020-12-02/90c7e355-67c5-4223-b077-3d6bf1d408cb.pdf","ShippingWeight":8,"FactWeight":0,"ShippingPrice":6.48,"TrackingNumbers":["1Z7A03740311821113"],"TN2":null,"Carrier":"UPS Ground 6","CarrierServiceLevel":"UPS Ground","ShipFrom":{"PostalCode":"92879","Name":"micheal","Address1":"2565 SAMPSON AVENUE","Address2":"","State":"CA","City":"CORONA","Country":"US","CountryCode":null,"PhoneNumber":"09512680000","AddrType":1,"Company":""},"ShipTo":{"PostalCode":"92551","Name":"Donovan","Address1":"24300 Nandina Ave","Address2":null,"State":"CA","City":"Moreno Valley","Country":"US","CountryCode":null,"PhoneNumber":"13474483190","AddrType":1,"Company":""},"OrderNum":"EX145719630","Parcels":[{"TrackingNumber":"1Z7A03740311821113","Weight":7.83,"Length":39.37,"Width":14.57,"Height":9.45,"Insure":0,"Picking":null,"FbaRef":null,"Quantity":0,"LabelUrl":"https://www.ex17usa.com/UploadFiles/UD/2020-12-02/90c7e355-67c5-4223-b077-3d6bf1d408cb.pdf","AdditionalFee":0}],"Signature":false,"LabelSize":0,"Remark":null,"Remark1":null,"Remark2":null,"Zone":null,"WeightUnitType":0,"AutoChangeService":false,"ShippingDate":null,"ItemList":null,"WarehouseCode":null,"CarrierType":""}}`
 	var mapParam = make(map[string]interface{})
 	mapParam["Data"] = params
@@ -134,7 +134,7 @@ func (s LabelService)GetShip(params string) (shipReply *Entry.ShipReply,err erro
 	return
 }
 
-func (s LabelService)GetCancel(orderNum string) bool {
+func (s KinghoodService)GetCancel(orderNum string) bool {
 	mOrderNum := make(map[string]interface{})
 	mOrderNum["OrderNum"] = orderNum
 	content, err1 := s.postRequest(Conf.GetApiCancel(), mOrderNum)

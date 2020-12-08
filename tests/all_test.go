@@ -9,12 +9,12 @@ import (
 	"testing"
 )
 
-var service *src.LabelService
+var service *src.KinghoodService
 
 const KEY = ""
 
 func init() {
-	service = src.NewLabelService(KEY)
+	service = src.NewKinghoodService(KEY)
 }
 
 func Test_balance(t *testing.T) {
