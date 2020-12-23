@@ -99,11 +99,18 @@ func (s KinghoodService)GetRate(params string) (rateReply *Entry.RateReply, err 
 	}
 	// Result
 	list := []*Entry.RateReply{}
+	//reply := Entry.Reply{}
 
-	_, err = Entry.ResponseResult(content, &list)
+	reply, err1 := Entry.ResponseResult(content, &list)
 
-	if err != nil {
-		fmt.Println("Response to Struct Error", err)
+	if err1 != nil {
+		err = err1
+		fmt.Println("Response to Struct Error", err1)
+		return
+	}
+
+	if len(list) == 0 {
+		err = errors.New(reply.Message)
 		return
 	}
 	rateReply =  list[0]
