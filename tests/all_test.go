@@ -3,23 +3,24 @@ package tests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/asrx/go-kinghood-api-wrapper/src"
-	"github.com/asrx/go-kinghood-api-wrapper/src/Entry"
 	"log"
 	"testing"
+
+	"github.com/asrx/go-kinghood-api-wrapper/src"
+	"github.com/asrx/go-kinghood-api-wrapper/src/Entry"
 )
 
 var service *src.KinghoodService
 
-const KEY = ""
+const KEY = "fea10ce956d743339253f4fafa627a25"
 
 func init() {
-	service = src.NewKinghoodService(KEY)
+	service = src.NewKinghoodService(KEY, "https://www.circlelinkgroup.com")
 }
 
 func Test_balance(t *testing.T) {
 
-	money,err := service.GetBalance()
+	money, err := service.GetBalance()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -37,31 +38,30 @@ func Test_carriers(t *testing.T) {
 
 func Test_rate(t *testing.T) {
 	shipment := Entry.Shipment{
-		Carrier:             "UPS Ground 6",
-		ShipFrom:            GetShipFrom(),
-		ShipTo:              GetShipTo(),
-		Parcels:             GetParcels(),
-		//FreightCalss:        nil,
-		//Signature:           nil,
-		//WeightUnitType:      nil,
+		Carrier:  "UPS Ground 6",
+		ShipFrom: GetShipFrom(),
+		ShipTo:   GetShipTo(),
+		Parcels:  GetParcels(),
+		// FreightCalss:        nil,
+		// Signature:           nil,
+		// WeightUnitType:      nil,
 		CarrierServiceLevel: "UPS Ground",
-		//LabelSize:           nil,
-		//Remark1:             nil,
-		//Remark2:             nil,
-		//EcOrder:             nil,
+		// LabelSize:           nil,
+		// Remark1:             nil,
+		// Remark2:             nil,
+		// EcOrder:             nil,
 	}
-	params,err := json.Marshal(shipment)
+	params, err := json.Marshal(shipment)
 	if err != nil {
 		log.Fatal("Shipment Marshal Json Error:", err)
 	}
-	//fmt.Println(string(params))
+	// fmt.Println(string(params))
 	rateReply, err := service.GetRate(string(params))
 	if err != nil {
-		log.Fatal("Rate Error:",err)
+		log.Fatal("Rate Error:", err)
 	}
 	fmt.Println(rateReply)
 }
-
 
 func Test_ship(t *testing.T) {
 	shipment := Entry.Shipment{
@@ -71,7 +71,7 @@ func Test_ship(t *testing.T) {
 		Parcels:             GetParcels(),
 		CarrierServiceLevel: "UPS Ground",
 	}
-	params,err := json.Marshal(shipment)
+	params, err := json.Marshal(shipment)
 	if err != nil {
 		log.Fatal("Shipment Marshal Json Error:", err)
 	}
@@ -83,5 +83,5 @@ func Test_ship(t *testing.T) {
 func Test_Cancel(t *testing.T) {
 	orderNumb := "EX145735965"
 	res := service.GetCancel(orderNumb)
-	log.Println("Cancel is:",res)
+	log.Println("Cancel is:", res)
 }
