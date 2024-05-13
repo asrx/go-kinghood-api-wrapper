@@ -12,10 +12,10 @@ import (
 
 var service *src.KinghoodService
 
-const KEY = "fea10ce956d743339253f4fafa627a25"
+const KEY = ""
 
 func init() {
-	service = src.NewKinghoodService(KEY, "https://www.circlelinkgroup.com")
+	service = src.NewKinghoodService(KEY, "")
 }
 
 func Test_balance(t *testing.T) {
