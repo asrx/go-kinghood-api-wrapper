@@ -158,10 +158,15 @@ func (s KinghoodService) GetShip(params string) (shipReply *Entry.ShipReply, err
 
 	// Result
 	// shipReply = new(Entry.ShipReply)
-	_, err = Entry.ResponseResult(content, &shipReply)
+	resp, err := Entry.ResponseResult(content, &shipReply)
 
 	if err != nil {
 		fmt.Println("Response to Struct Error", err)
+		return
+	}
+
+	if resp.Code != "200" {
+		err = errors.New(resp.Message)
 		return
 	}
 
