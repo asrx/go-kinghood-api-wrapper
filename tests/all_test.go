@@ -12,10 +12,13 @@ import (
 
 var service *src.KinghoodService
 
-const KEY = ""
+const (
+	KEY     = ""
+	BaseURI = ""
+)
 
 func init() {
-	service = src.NewKinghoodService(KEY, "")
+	service = src.NewKinghoodService(KEY, BaseURI)
 }
 
 func Test_balance(t *testing.T) {
@@ -84,4 +87,13 @@ func Test_Cancel(t *testing.T) {
 	orderNumb := "EX145735965"
 	res := service.GetCancel(orderNumb)
 	log.Println("Cancel is:", res)
+}
+
+func Test_LabelInfo(t *testing.T) {
+	orderNo := "[\"GS116259026\"]"
+	info, err := service.GetLabelInfo(orderNo)
+	if err != nil {
+		log.Fatal("get label info error:", err.Error())
+	}
+	fmt.Printf("%+v\n", info)
 }

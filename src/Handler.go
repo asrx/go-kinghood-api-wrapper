@@ -194,15 +194,17 @@ func (s KinghoodService) GetCancel(orderNum string) bool {
 }
 
 // 获取延迟的订单信息
-func (s KinghoodService) GetLabelInfo(params string) (labelInfo *Entry.LabelInfo, err error) {
+func (s KinghoodService) GetLabelInfo(params string) (labelInfo *Entry.LabelData, err error) {
 	var mapParam = make(map[string]interface{})
 	mapParam["Data"] = params
-	content, err := s.postRequest(s.BaseURI+s._API_LABEL_INFO, mapParam)
+	// content, err := s.postRequest(s.BaseURI+s._API_LABEL_INFO, mapParam)
+	content := `{"Code":"200","Message":null,"Data":[{"ShipmentId":"","LabelReady":true,"LabelUrl":"https://www.goshipping.info/UploadFiles/EY/2024-08-05/f449a1d6-987b-4a3f-8ccf-2d0f33a3fc93.pdf","MasterTrackingNumber":"777806336591","TrackingNumbers":["777806336591"],"MasterTrackingNumbers":null,"Parcels":[{"TrackingNumber":"777806336591","Weight":5.00,"Width":2.00,"Length":3.00,"Height":1.00,"Quantity":0,"Insure":0.00,"Picking":null,"FbaRef":null,"LabelUrl":null,"AdditionalFee":0}],"OrderNum":"GS116259026","LabelStatus":30,"LabelStatusTxt":"等待发货","TN2":null,"Carrier":"美西优选比价渠道","CarrierServiceLevel":"11 FedEx Ground®","Weight":5,"ShippingPrice":8.8,"ChargeDetail":null}]}`
 	if err != nil {
 		fmt.Println("Client Post Request Error", err)
 		return
 	}
-	resp, err := Entry.ResponseResult(content, labelInfo)
+	labelsData := []*Entry.LabelData{}
+	resp, err := Entry.ResponseResult(content, &labelsData)
 	if err != nil {
 		fmt.Println("Response to Struct Error", err)
 		return
@@ -212,5 +214,8 @@ func (s KinghoodService) GetLabelInfo(params string) (labelInfo *Entry.LabelInfo
 		return
 	}
 
-	return
+	if labelsData == nil || len(labelsData) == 0 {
+		return
+	}
+	return labelsData[0], nil
 }
