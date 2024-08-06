@@ -173,6 +173,7 @@ func (s KinghoodService) GetShip(params string) (shipReply *Entry.ShipReply, err
 	return
 }
 
+// Cancel
 func (s KinghoodService) GetCancel(orderNum string) bool {
 	mOrderNum := make(map[string]interface{})
 	mOrderNum["OrderNum"] = orderNum
@@ -190,4 +191,26 @@ func (s KinghoodService) GetCancel(orderNum string) bool {
 		return true
 	}
 	return false
+}
+
+// 获取延迟的订单信息
+func (s KinghoodService) GetLabelInfo(params string) (labelInfo *Entry.LabelInfo, err error) {
+	var mapParam = make(map[string]interface{})
+	mapParam["Data"] = params
+	content, err := s.postRequest(s.BaseURI+s._API_LABEL_INFO, mapParam)
+	if err != nil {
+		fmt.Println("Client Post Request Error", err)
+		return
+	}
+	resp, err := Entry.ResponseResult(content, labelInfo)
+	if err != nil {
+		fmt.Println("Response to Struct Error", err)
+		return
+	}
+	if resp.Code != "200" {
+		err = errors.New(resp.Message)
+		return
+	}
+
+	return
 }
