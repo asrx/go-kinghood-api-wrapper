@@ -218,8 +218,6 @@ func (s KinghoodService) GetLabelInfo(params string) (labelInfo *Entry.LabelData
 	if labelsData == nil || len(labelsData) == 0 {
 		return
 	}
-	if labelInfo.LabelStatus == 1810 {
-		return
-	}
+	
 	return labelsData[0], nil
 }
