@@ -20,9 +20,9 @@ type LabelData struct {
 	TN2                   interface{} `json:"TN2"`
 	Carrier               string      `json:"Carrier"`
 	CarrierServiceLevel   string      `json:"CarrierServiceLevel"`
-	Weight                float64     `json:"Weight"`
-	ShippingPrice         float64     `json:"ShippingPrice"`
-	ChargeDetail          interface{} `json:"ChargeDetail"`
+	// Weight                float64     `json:"Weight"`
+	ShippingPrice float64     `json:"ShippingPrice"`
+	ChargeDetail  interface{} `json:"ChargeDetail"`
 }
 
 // Parcels struct {
