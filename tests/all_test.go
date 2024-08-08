@@ -86,7 +86,7 @@ func Test_ship(t *testing.T) {
 func Test_Cancel(t *testing.T) {
 	orderNumb := "EX145735965"
 	res := service.GetCancel(orderNumb)
-	log.Println("Cancel is:", res)
+	log.Println(res)
 }
 
 func Test_LabelInfo(t *testing.T) {

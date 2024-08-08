@@ -174,23 +174,22 @@ func (s KinghoodService) GetShip(params string) (shipReply *Entry.ShipReply, err
 }
 
 // Cancel
-func (s KinghoodService) GetCancel(orderNum string) bool {
+func (s KinghoodService) GetCancel(orderNum string) *Entry.Reply {
 	mOrderNum := make(map[string]interface{})
 	mOrderNum["OrderNum"] = orderNum
-	content, err1 := s.postRequest(s.BaseURI+s._API_LABEL_CANCEL, mOrderNum)
-	if err1 != nil {
-		fmt.Println("Client Post Request Error", err1)
-		return false
-	}
+	content, err := s.postRequest(s.BaseURI+s._API_LABEL_CANCEL, mOrderNum)
+	// content := `{"Code":"603","Message":"退款申请失败:服务商提示:没有查询到合适的数据！","Data":null}`
+	// if err != nil {
+	// 	fmt.Println("Client Post Request Error", err1)
+	// 	return false
+	// }
 	// content := `{"Code":"200","Message":null,"Data":null}`
 	reply, err := Entry.ResponseResult(content, nil)
 	if err != nil {
 		fmt.Println("Response Error", err)
 	}
-	if reply.Code == "200" {
-		return true
-	}
-	return false
+
+	return reply
 }
 
 // 获取延迟的订单信息
@@ -218,6 +217,6 @@ func (s KinghoodService) GetLabelInfo(params string) (labelInfo *Entry.LabelData
 	if labelsData == nil || len(labelsData) == 0 {
 		return
 	}
-	
+
 	return labelsData[0], nil
 }
